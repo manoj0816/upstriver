@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPStriver - Affordable Creative Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles - Yellow Background Theme */
+        :root {
+            --primary: #000000; /* Black */
+            --primary-dark: #111111; /* Darker black */
+            --secondary: #FFD700; /* Gold/Yellow */
+            --secondary-dark: #FFC000; /* Darker gold */
+            --dark: #000000; /* Dark gray */
+            --darker: #111111; /* Almost black */
+            --light: #FFF8E1; /* Light yellow background */
+            --gray: #666666; /* Medium gray */
+            --light-gray: #ffde66; /* Light yellow-gray */
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        body {
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            color: var(--darker);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-secondary);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            color: var(--darker);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-secondary);
+            z-index: -1;
+            transition: transform 0.4s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+        
+        .btn:hover:before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .btn:hover {
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:before {
+            background: var(--gradient);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+       
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 248, 225, 0.95); /* Semi-transparent light yellow */
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+       /* Updated Logo Styles */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8px;
+        }
+        
+        .logo-img {
+            height: 40px; /* Adjust based on your logo's aspect ratio */
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-text span {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        
+        .logo:hover .logo-img {
+            transform: rotate(15deg);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Mobile Menu Button - Fixed Styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            z-index: 1001;
+            padding: 10px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--light);
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding-top: 80px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+                width: 100%;
+                padding: 0 30px;
+            }
+            
+            .nav-links a {
+                font-size: 1.2rem;
+                padding: 10px 0;
+                display: block;
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-btns .btn {
+                display: block;
+                margin: 15px auto;
+                max-width: 250px;
+            }
+            
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+            }
+            
+            .service-card,
+            .package-card {
+                padding: 30px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFEEB3 100%);
+            padding: 180px 0 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0) 70%);
+            z-index: 0;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: slideUp 0.8s ease forwards;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            animation: slideUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+        
+        .hero-btns {
+            margin-top: 40px;
+            animation: slideUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+        
+        .hero-btns .btn {
+            margin: 0 15px;
+        }
+        
+        .hero-image {
+            margin-top: 60px;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-image:hover img {
+            transform: perspective(1000px) rotateY(0) rotateX(0);
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--light);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateY(5deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: perspective(1000px) rotateY(0);
+        }
+        
+        .about-image:before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--secondary);
+            border-radius: 20px;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .about-image:hover:before {
+            top: -15px;
+            left: -15px;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .services .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transform: translateY(0);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-secondary);
+            transition: height 0.3s ease;
+        }
+        
+        .service-card:hover:before {
+            height: 10px;
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+            color: var(--primary);
+        }
+        
+        /* Packages Section */
+        .packages {
+            background-color: var(--light);
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .package-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            background: white;
+            z-index: 1;
+        }
+        
+        .package-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .package-card:hover {
+            border-color: transparent;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            color: white;
+        }
+        
+        .package-card:hover:before {
+            opacity: 1;
+        }
+        
+        .package-card:hover h3,
+        .package-card:hover .package-price,
+        .package-card:hover .package-features li {
+            color: white;
+        }
+        
+        .package-card:hover .btn {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .package-card h3 {
+            color: var(--darker);
+            transition: color 0.3s ease;
+        }
+        
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 25px 0;
+            color: var(--dark);
+            transition: color 0.3s ease;
+        }
+        
+        .package-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+        
+        .package-features li {
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+            color: var(--gray);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .package-features li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 10px;
+            color: var(--secondary);
+            transition: color 0.3s ease;
+        }
+        
+        .package-card:hover .package-features li:before {
+            color: white;
+        }
+        
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .package-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--gradient-secondary);
+            color: var(--dark);
+            padding: 5px 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* FAQ Section */
+        .faq {
+            background-color: var(--light);
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-question {
+            padding: 20px 25px;
+            background-color: white;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background-color: #FFF8E1;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            background-color: white;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 25px 25px;
+            max-height: 500px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Enhanced Emoji Background Styles */
+        .emoji-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.7;
+            animation: floatEmoji 15s infinite linear;
+            will-change: transform;
+        }
+
+        /* Positioning and animation for all 10 emojis */
+        .emoji:nth-child(1) { 
+            animation: floatEmoji 12s infinite linear; 
+            top: 10%; 
+            left: 15%; 
+        }
+        .emoji:nth-child(2) { 
+            animation: floatEmoji 18s infinite linear reverse; 
+            top: 25%; 
+            left: 75%; 
+        }
+        .emoji:nth-child(3) { 
+            animation: floatEmoji 15s infinite linear 2s; 
+            top: 65%; 
+            left: 25%; 
+        }
+        .emoji:nth-child(4) { 
+            animation: floatEmoji 14s infinite linear 3s reverse; 
+            top: 45%; 
+            left: 65%; 
+        }
+        .emoji:nth-child(5) { 
+            animation: floatEmoji 16s infinite linear 1s; 
+            top: 75%; 
+            left: 15%; 
+        }
+        .emoji:nth-child(6) { 
+            animation: floatEmoji 13s infinite linear 4s; 
+            top: 20%; 
+            left: 50%; 
+        }
+        .emoji:nth-child(7) { 
+            animation: floatEmoji 17s infinite linear reverse 2s; 
+            top: 55%; 
+            left: 80%; 
+        }
+        .emoji:nth-child(8) { 
+            animation: floatEmoji 19s infinite linear 3s; 
+            top: 85%; 
+            left: 40%; 
+        }
+        .emoji:nth-child(9) { 
+            animation: floatEmoji 11s infinite linear reverse 1s; 
+            top: 35%; 
+            left: 30%; 
+        }
+        .emoji:nth-child(10) { 
+            animation: floatEmoji 20s infinite linear 2s; 
+            top: 60%; 
+            left: 60%; 
+        }
+
+        @keyframes floatEmoji {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(40px, -30px) rotate(15deg) scale(1.1); }
+            50% { transform: translate(30px, 30px) rotate(30deg) scale(1); }
+            75% { transform: translate(-40px, -20px) rotate(-15deg) scale(1.1); }
+            100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+        }
+
+        .contact .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 60px;
+        }
+
+        .contact-form {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--darker);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+            outline: none;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding-top: 40px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-secondary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            color: var(--darker);
+            margin-bottom: 5px;
+        }
+
+        .contact-details a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: var(--secondary-dark);
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--gradient-secondary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Styles for Contact Section */
+        @media (max-width: 1024px) {
+            .contact .container {
+                flex-direction: column;
+            }
+            
+            .emoji-background {
+                width: 100%;
+                height: 200px;
+                position: relative;
+            }
+            
+            .contact-info {
+                padding-top: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .emoji {
+                font-size: 2.5rem;
+            }
+            
+            .contact-form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .emoji {
+                font-size: 2rem;
+            }
+            
+            .contact-form {
+                padding: 20px;
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--darker);
+            color: white;
+            padding: 60px 0 30px;
+            position: relative;
+        }
+        
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--gradient-secondary);
+        }
+        
+        .footer-content {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col {
+            flex: 1;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .footer-links a:before {
+            content: '\f054';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 10px;
+            font-size: 0.7rem;
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-secondary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .about-content,
+            .contact .container {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                margin-top: 40px;
+            }
+            
+            .contact:before {
+                width: 100%;
+                border-radius: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-btns .btn {
+                display: block;
+                margin: 15px auto;
+                max-width: 250px;
+            }
+            
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+            }
+            
+            .service-card,
+            .package-card {
+                padding: 30px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+     <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <!-- Replace "logo.png" with your actual logo file path -->
+                    <img src="logo1.png" alt="UPStriver Logo" class="logo-img">
+                    <div class="logo-text">UP<span>Striver</span></div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#packages">Packages</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Your Affordable Creative Partner</h1>
+            <p>At UPStriver, we empower small businesses with eye-catching designs, powerful websites, and engaging ads – all at budget-friendly prices. Whether you're just starting out or looking to refresh your brand, we've got you covered.</p>
+            <div class="hero-btns">
+                <a href="#packages" class="btn">View Our Packages</a>
+                <a href="#contact" class="btn btn-secondary">Get a Free Quote</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Creative Design Work">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="text-center">About UPStriver</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>UPStriver is a creative tech studio dedicated to helping startups and small businesses establish a strong brand identity online and offline. Our goal is to make professional-quality services accessible to everyone – without the high price tag.</p>
+                    <p>We specialize in custom websites, brand logos, promotional videos, and social media ads. Founded by passionate creatives and developers, we believe every business deserves to stand out, grow, and thrive – and we're here to make that happen for you.</p>
+                    <div style="margin-top: 30px;">
+                        <a href="#services" class="btn">Our Services</a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="Strivers.png" alt="UPStriver Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="text-center">Our Services</h2>
+            <p class="text-center">We offer a comprehensive range of creative services to help your business stand out in the digital world.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Website Design & Development</h3>
+                    <p>Professional, responsive websites for small businesses. From single-page portfolios to multi-page business websites, we design with user experience and mobile compatibility in mind.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-palette"></i></div>
+                    <h3>Logo Design</h3>
+                    <p>Unique, memorable logos that reflect your brand identity. Perfect for startups and rebranding efforts.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-video"></i></div>
+                    <h3>Video Editing & Creation</h3>
+                    <p>Short promotional videos, reels, intros, and engaging social media content – tailored to your niche.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-ad"></i></div>
+                    <h3>Ad Design</h3>
+                    <p>Eye-catching graphics and creatives for social media and digital ads. Great for Facebook, Instagram, Google Ads, and more.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="packages">
+        <div class="container">
+            <h2 class="text-center">Our Packages</h2>
+            <p class="text-center">Affordable solutions tailored to your business needs and budget.</p>
+            <div class="packages-grid">
+                <div class="package-card">
+                    <h3>Starter Pack</h3>
+                    <div class="package-price">₹1,999*</div>
+                    <ul class="package-features">
+                        <li>1-page Responsive Website</li>
+                        <li>1 Custom Logo Design</li>
+                        <li>1 Social Media Ad Graphic</li>
+                        <li>Basic Support (Email)</li>
+                    </ul>
+                    <a href="#contact" class="btn">Get Started</a>
+                </div>
+                <div class="package-card">
+                    <div class="package-badge">Popular</div>
+                    <h3>Business Pack</h3>
+                    <div class="package-price">₹4,999*</div>
+                    <ul class="package-features">
+                        <li>3-page Website</li>
+                        <li>2 Logo Concepts</li>
+                        <li>3 Social Media Ad Creatives</li>
+                        <li>1 Promo Video (30 sec)</li>
+                        <li>WhatsApp & Email Support</li>
+                    </ul>
+                    <a href="#contact" class="btn">Get Started</a>
+                </div>
+                <div class="package-card">
+                    <h3>Pro Pack</h3>
+                    <div class="package-price">₹9,999*</div>
+                    <ul class="package-features">
+                        <li>5-page Website (includes Contact Form)</li>
+                        <li>3 Logo Concepts + Final Branding Kit</li>
+                        <li>5 Social Media Ad Creatives</li>
+                        <li>2 Promo/Reel Videos</li>
+                        <li>Domain + Hosting Assistance</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <a href="#contact" class="btn">Get Started</a>
+                </div>
+            </div>
+            <p class="text-center" style="margin-top: 30px;">*Note: All websites are mobile-optimized and designed for performance.</p>
+            <div class="text-center" style="margin-top: 30px;">
+                <a href="#contact" class="btn btn-secondary">Need a Custom Package?</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="text-center">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How long does it take to complete a project?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Most projects are completed within 5–10 working days depending on the package and requirements. More complex projects may take additional time, which we'll discuss with you upfront.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I update the website later?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! We offer update services, or you can opt for a CMS-based site with easy editing options. We'll train you on how to make simple updates yourself if you choose that option.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What if I need more than one logo or revision?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Revisions are included based on your package. Additional changes can be requested for a minimal fee. We'll work with you until you're completely satisfied with the final design.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do you handle hosting and domains?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We assist with domain and hosting setup, especially in Pro and Custom packs. We can recommend reliable hosting providers or manage it for you as part of our ongoing support services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <!-- Add this div inside your contact section, right after the opening <section> tag -->
+<div class="emoji-background">
+  <div class="emoji">📱</div>
+  <div class="emoji">📧</div>
+  <div class="emoji">💬</div>
+  <div class="emoji">🤵‍♀️</div>
+  <div class="emoji">📞</div>
+  <div class="emoji">📞</div>
+  <div class="emoji">🤵</div>
+  <div class="emoji">👍</div>
+  <div class="emoji">😊</div>
+  <div class="emoji">😊</div>
+</div>
+        <div class="container">
+            <h2 class="text-center">Let's Build Something Amazing Together</h2>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Interested In</label>
+                        <select id="service" name="service">
+                            <option value="">Select a service</option>
+                            <option value="website">Website Design</option>
+                            <option value="logo">Logo Design</option>
+                            <option value="video">Video Creation</option>
+                            <option value="ads">Ad Design</option>
+                            <option value="package">Package Deal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Email Us</h4>
+                        <a href="mailto:contact@upstriver.com">upstriver0216@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Call/WhatsApp</h4>
+                        <a href="tel:+918111010353">+91 8111010353</a>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Location</h4>
+                        <p>Based in India – Available Globally</p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://wa.me/918111-10353" target="_blank"><i class="fab fa-whatsapp"></i></a>
+               </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">UPStriver</div>
+                    <p>Your affordable creative partner for eye-catching designs, powerful websites, and engaging ads – all at budget-friendly prices.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Website Design</a></li>
+                        <li><a href="#services">Logo Design</a></li>
+                        <li><a href="#services">Video Creation</a></li>
+                        <li><a href="#services">Ad Design</a></li>
+                        <li><a href="#packages">Package Deals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 UPStriver. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle - Fixed Implementation
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            
+            // Change icon based on menu state
+            if (navLinks.classList.contains('active')) {
+                this.innerHTML = '<i class="fas fa-times"></i>';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            } else {
+                this.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = ''; // Re-enable scrolling
+            }
+        });
+        
+        // Close menu when clicking on a nav link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = ''; // Re-enable scrolling
+            });
+        });
+        
+        // Scroll Header Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('active');
+            } else {
+                backToTopBtn.classList.remove('active');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+        
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would typically send the form data to your server
+            // For this example, we'll just show an alert
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+        
+        // Intersection Observer for Scroll Animations
+        const sections = document.querySelectorAll('section');
+        
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            observer.observe(section);
+            // Initially set all sections to be slightly offset
+            section.style.transform = 'translateY(30px)';
+        });
+        
+        // Hero Image Float Animation
+        const heroImage = document.querySelector('.hero-image');
+        
+        function animateHeroImage() {
+            heroImage.style.animation = 'float 6s ease-in-out infinite';
+        }
+        
+        // Start animation after a slight delay
+        setTimeout(animateHeroImage, 500);
+    </script>
+</body>
+</html>
